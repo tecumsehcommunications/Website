@@ -31,6 +31,7 @@ body {
 #navControls {
     height:60px;
     position:absolute;
+    max-width:95vw;
     margin-left:50%;
     transform:translateX(-50%);
 }
