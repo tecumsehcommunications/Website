@@ -1,0 +1,121 @@
+
+body {
+    padding:0px;
+    margin:0px;
+    border:0px;
+    overflow:hidden;
+}
+
+#scenes {
+    overflow:hidden;
+    position:fixed;
+    width:100%;
+    height:100%;
+    background-color:#fefbd8;   
+}
+
+#canvasContainer {
+    width:100%;
+    height:100%;
+}
+
+#navControlsContainer {
+    background-color:#fefbd8;
+    position:absolute;
+    margin-left:50%;
+    transform:translateX(-50%);
+    bottom:66px; /* related to height in #buttons */
+    
+}
+
+#navControls {
+    height:60px;
+    position:absolute;
+    margin-left:50%;
+    transform:translateX(-50%);
+}
+
+#rotateControls {
+    width:60px;
+    position:absolute;
+    right:0px;
+    top:50%;
+    transform:translateY(-50%);
+}
+
+.containedImg {
+    position:absolute;
+    width:100%;
+    height:100%;
+ }
+
+#pitch {
+    width:90vw;
+    height:70vh;
+    max-height:70vh;
+    top:10%;
+    position:absolute;
+    left:50%;
+    transform:translateX(-50%);
+}
+
+#contact {
+    width:90vw;
+    height:30vh;
+    max-height:30vh;
+    top:30%;
+    position:absolute;
+    left:50%;
+    transform:translateX(-50%);
+}
+
+#logo {
+    width:90vw;
+    height:30vh;
+    position:absolute;
+    left:50%;
+    top:45%;
+    transform:translate(-50%, -45%);
+}
+
+.ring {
+    top:50%;
+    left:50%;
+    margin: -48px 0 0 -48px;        
+    display: inline-block;
+    position: absolute;
+    width: 96px;
+    height: 96px;
+}
+.ring div {
+  box-sizing: border-box;
+  display: block;
+  position: absolute;
+  width: 96px;
+  height: 96px;
+  margin: 0px;
+  border: 6px solid #000000;
+  border-radius: 50%;
+  animation: ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+  border-color: #000000 transparent transparent transparent;
+}
+.ring div:nth-child(1) {
+    animation-delay: -0.45s;
+    animation-play-state: paused;
+}
+.ring div:nth-child(2) {
+    animation-delay: -0.3s;
+    animation-play-state: paused;
+}
+.ring div:nth-child(3) {
+    animation-delay: -0.15s;
+    animation-play-state: paused;
+}
+@keyframes ring {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
