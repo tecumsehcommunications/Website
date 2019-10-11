@@ -1,2 +1,2 @@
 # Website
-tecumseh communications website
+tecumseh communications website.
