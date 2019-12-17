@@ -1,5 +1,5 @@
 {
   :paths ["src"]
-  :deps {org.clojure/clojurescript {:mvn/version "1.10.520"}}
+  :deps {org.clojure/clojurescript {:mvn/version "1.10.597"}}
  }
 

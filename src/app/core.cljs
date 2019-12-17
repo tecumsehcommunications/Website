@@ -56,6 +56,12 @@
   (def ncGithubBack (.getElementById
                    (. navControls -contentDocument) "githubBackground"))
   
+  ; scene controls
+
+    (def sceneControls (.getElementById js.document "sceneControls"))
+    (def resetSceneButton (.getElementById
+               (. sceneControls -contentDocument) "reset"))
+
 
   ;app
 
@@ -165,21 +171,19 @@
  (.activate ncHome.controller) 
 
 
-  (.push frameLoop.xArray renderControl)
-  (.run frameLoop)
+ (.push frameLoop.xArray renderControl)
+ (.run frameLoop)
   
  (.listenOnce dispatcher "scene loaded"
               (fn [e]
                 (set! canvasContainer.style.opacity 1)
                 (set! canvas.style.display nil)
                 (def controls (new js.THREE.OrbitControls scenes/camera canvas))
-                (set! controls.enableRotate false)
-                (.set controls.target
-                      scenes/camera.position.x
-                      0
-                      scenes/camera.position.z)
-                (.update controls)
-                (.saveState controls)
+                (set! resetSceneButton.onclick
+                      (fn [evt]
+                        (.preventDefault evt)
+                        (.reset controls)))
+
                 (.stop spinner)
                 (set! renderControl.active true)))
   

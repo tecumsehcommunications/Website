@@ -36,12 +36,11 @@ body {
     transform:translateX(-50%);
 }
 
-#rotateControls {
-    width:60px;
+#sceneControls {
+    width:50px;
     position:absolute;
-    right:0px;
-    top:50%;
-    transform:translateY(-50%);
+    left:0px;
+    top:10px;
 }
 
 .containedImg {
