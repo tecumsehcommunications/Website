@@ -154,7 +154,7 @@
                       (.activate ncHome.controller)
                       (.deactivate ncGithub.controller)
                       (.open js.window
-                         "https://github.com/tecumsehcommunications/StarlinkViewer"
+                         "https://github.com/tecumsehcommunications"
                          "_blank"))
                     nil ; onDeactivate
                     nil ; onAfterUp
