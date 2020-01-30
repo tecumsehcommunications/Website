@@ -22,6 +22,30 @@
     (set! this.active false)))
 
 
+(deftype ToggleButton [ button backing onActive onDeactive ] Object
+    (init [ this  ]
+      (set! this.button.onclick
+            (fn [evt] (.onclick this evt)))
+      (set! this.clicked false)
+      this)
+
+    (onclick [this evt ]
+      (.preventDefault evt)
+      (if (= this.clicked false)
+        (.activate this)
+        (.deactivate this)))
+
+    (activate [ this ]
+      (set! this.clicked true)
+      (set! this.backing.style.opacity "0")
+      (.onActive this))
+
+    (deactivate [ this ]
+      (set! this.clicked false)
+      (set! this.backing.style.opacity "1")
+      (.onDeactive this)))
+    
+
 (deftype ControlButton [ button target onActivate onDeactivate onAfterUp onAfterDown] Object
     (init [ this backing controlsList step ]
       (set! this.button.onclick (fn [evt] (.onclick this evt)))

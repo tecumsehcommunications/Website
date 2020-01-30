@@ -1,4 +1,5 @@
 (ns app.core
+  
   (:require [app.repl :as repl]
             [app.util.frame :as frame]
             [app.render :as renderer]
@@ -6,7 +7,6 @@
             [app.util.time :as time]
             [app.controllers :as controllers])
    (:import goog.events))
-
 
 (def resizeArray (array))
 (set! js/window.onresize
@@ -58,9 +58,33 @@
   
   ; scene controls
 
-    (def sceneControls (.getElementById js.document "sceneControls"))
-    (def resetSceneButton (.getElementById
-               (. sceneControls -contentDocument) "reset"))
+  (def sceneControls (.getElementById js.document "sceneControls"))
+
+  (def resetButton (.getElementById
+       (. sceneControls -contentDocument) "resetButton"))
+
+  (def antennaButton (.getElementById
+               (. sceneControls -contentDocument) "antennaButton"))
+  (def antennaBackground (.getElementById
+                          (. sceneControls -contentDocument) "antennaBackground"))
+
+
+  (def cageButton (.getElementById
+               (. sceneControls -contentDocument) "cageButton"))
+  (def cageBackground (.getElementById
+               (. sceneControls -contentDocument) "cageBackground"))
+
+  (def liftButton (.getElementById
+                   (. sceneControls -contentDocument) "liftButton"))
+  (def liftBackground (.getElementById
+               (. sceneControls -contentDocument) "liftBackground"))
+
+  
+  (def truckButton (.getElementById
+               (. sceneControls -contentDocument) "truckButton"))
+  (def truckBackground (.getElementById
+                        (. sceneControls -contentDocument) "truckBackground"))
+
 
 
   ;app
@@ -179,12 +203,54 @@
                 (set! canvasContainer.style.opacity 1)
                 (set! canvas.style.display nil)
                 (def controls (new js.THREE.OrbitControls scenes/camera canvas))
-                (set! resetSceneButton.onclick
+
+                (set! resetButton.onclick
                       (fn [evt]
                         (.preventDefault evt)
                         (.reset controls)))
+                
+                (set! antennaButton.controller
+                  (.init (new controllers/ToggleButton
+                              antennaButton
+                              antennaBackground
+                          (fn []
+                            (set! scenes/scene.objects.antenna.visible false)
+                            (set! scenes/scene.objects.rope.visible false))
+                            
+                          (fn []
+                            (set! scenes/scene.objects.antenna.visible true)
+                            (set! scenes/scene.objects.rope.visible true)))))
+               
+                (set! cageButton.controller
+                  (.init (new controllers/ToggleButton
+                              cageButton
+                              cageBackground
+                              (fn []
+                                (set! scenes/scene.objects.cage.visible false)
+                                (set! scenes/scene.objects.bedRails.visible false))
+                                
+                              (fn []
+                                (set! scenes/scene.objects.cage.visible true)
+                                (set! scenes/scene.objects.bedRails.visible true)))))
+                       
+                              
+                (set! liftButton.controller
+                  (.init (new controllers/ToggleButton
+                              liftButton
+                              liftBackground
+                     (fn [] (set! scenes/scene.objects.lift.visible false))
+                     (fn [] (set! scenes/scene.objects.lift.visible true)))))
 
-                (.stop spinner)
-                (set! renderControl.active true)))
+
+                (set! truckButton.controller
+                  (.init (new controllers/ToggleButton
+                              truckButton
+                              truckBackground
+                     (fn [] (set! scenes/scene.objects.truckBody.visible false))
+                     (fn [] (set! scenes/scene.objects.truckBody.visible true)))))
+                
+
+               (.stop spinner)
+               (set! renderControl.active true)))
   
 )

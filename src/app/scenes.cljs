@@ -15,15 +15,25 @@
                        (/ js.window.innerWidth js.window.innerHeight)
                        .25
                        20))
+      (set! scene.objects (js-obj))
       
       (.forEach scene.children
-           (fn [ el idx arr ]
-             (if (= el.name "rSun")
-               (aset el.children 0 "intensity" 3))
-             (if (= el.name "lSun")
-               (aset el.children 0 "intensity" 3))))
-             
-    
+        (fn [ el idx arr ]
+          (case el.name
+             "lSun1" (aset el.children 0 "intensity" 1)
+             "lSun2" (aset el.children 0 "intensity" 1)
+             "rSun1" (aset el.children 0 "intensity" 1)
+             "rSun2" (aset el.children 0 "intensity" 1)
+             "bSun"  (aset el.children 0 "intensity" 1)
+             "truckBody" (set! scene.objects.truckBody el)
+             "cage" (set! scene.objects.cage el)
+             "antenna" (set! scene.objects.antenna el)
+             "bedRailsAssembly"
+                (set! scene.objects.bedRails el)
+             "rope" (set! scene.objects.rope el)
+             "lift" (set! scene.objects.lift el)
+              ())))
+       
       (set! camera.far 10000)      
       (.set camera.position 1000 0 0)
       (.lookAt camera 0 0 0)
