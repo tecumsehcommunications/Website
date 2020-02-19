@@ -60,7 +60,7 @@
       this)
 
     (onclick [this evt ]
-      (.preventDefault evt)
+      (if evt (.preventDefault evt))
       (set! this.blocked false) 
       (if (. this -clicked)
        nil  ; if already clicked on, don't do anything

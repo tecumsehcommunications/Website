@@ -192,9 +192,6 @@
  (.add pulser (. ncPitch -controller))
  (.add pulser (. ncBaseStation -controller))
 
- (.activate ncHome.controller) 
-
-
  (.push frameLoop.xArray renderControl)
  (.run frameLoop)
   
@@ -252,5 +249,17 @@
 
                (.stop spinner)
                (set! renderControl.active true)))
+
+  (let [ param (aget
+              js.window.location.search
+              (- js.window.location.search.length 1)) ]
+   (case param
+     "1" (.onclick ncBaseStation.controller)
+     "2" (.onclick ncPitch.controller)
+     "3" (.onclick ncHome.controller)
+     "4" (.onclick ncContact.controller)
+     "5" (.onclick ncGithub.controller)
+     (.onclick ncHome.controller)))
+
   
 )
