@@ -26,19 +26,22 @@
              "rSun2" (aset el.children 0 "intensity" 1)
              "bSun"  (aset el.children 0 "intensity" 1)
              "truckBody" (set! scene.objects.truckBody el)
-             "cage" (set! scene.objects.cage el)
-             "antenna" (set! scene.objects.antenna el)
-             "bedRailsAssembly"
-                (set! scene.objects.bedRails el)
-             "rope" (set! scene.objects.rope el)
-             "lift" (set! scene.objects.lift el)
+             "bedRailsAssembly" (set! scene.objects.bedRails el)
+             "generator" (set! scene.objects.generator el)
+             "grate" (set! scene.objects.grate el)
+             "rails" (set! scene.objects.rails el)
+             "rollBar" (set! scene.objects.rollBar el)
+             "truckbed" (set! scene.objects.truckbed el)
+             "truckBox" (set! scene.objects.truckBox el)
+             "wifiAntenna" (set! scene.objects.wifiAntenna el)
+             
               ())))
        
       (set! camera.far 10000)      
       (.set camera.position 1000 0 0)
       (.lookAt camera 0 0 0)
       (aset camera "aspect"
-               (/ js.window.innerWidth js.window.innerHeight))
+            (/ js.window.innerWidth js.window.innerHeight))
       (set! scene.aspect camera.aspect)
       (.updateProjectionMatrix camera)
       

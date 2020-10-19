@@ -1,5 +1,4 @@
 (ns app.core
-  
   (:require [app.repl :as repl]
             [app.util.frame :as frame]
             [app.render :as renderer]
@@ -211,32 +210,29 @@
                               antennaButton
                               antennaBackground
                           (fn []
-                            (set! scenes/scene.objects.antenna.visible false)
-                            (set! scenes/scene.objects.rope.visible false))
+                            (set! scenes/scene.objects.bedRails.visible false))
                             
                           (fn []
-                            (set! scenes/scene.objects.antenna.visible true)
-                            (set! scenes/scene.objects.rope.visible true)))))
+                            (set! scenes/scene.objects.bedRails.visible true)))))
                
                 (set! cageButton.controller
                   (.init (new controllers/ToggleButton
                               cageButton
                               cageBackground
                               (fn []
-                                (set! scenes/scene.objects.cage.visible false)
-                                (set! scenes/scene.objects.bedRails.visible false))
+                                (set! scenes/scene.objects.truckBox.visible false))
                                 
                               (fn []
-                                (set! scenes/scene.objects.cage.visible true)
-                                (set! scenes/scene.objects.bedRails.visible true)))))
+                                (set! scenes/scene.objects.truckBox.visible true)))))
                        
-                              
+                (.activate cageButton.controller)
+                
                 (set! liftButton.controller
                   (.init (new controllers/ToggleButton
                               liftButton
                               liftBackground
-                     (fn [] (set! scenes/scene.objects.lift.visible false))
-                     (fn [] (set! scenes/scene.objects.lift.visible true)))))
+                     (fn [] (set! scenes/scene.objects.rollBar.visible false))
+                     (fn [] (set! scenes/scene.objects.rollBar.visible true)))))
 
 
                 (set! truckButton.controller
