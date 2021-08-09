@@ -1,0 +1,2 @@
+clj -M --main cljs.main --repl-opts "{:launch-browser false}" -co "{ :main "app.core" :optimizations :simple :source-map false :output-dir \".btemp\" :output-to \"pub/js/app.js\"}" --compile "app.core"
+

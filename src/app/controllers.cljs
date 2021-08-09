@@ -76,7 +76,7 @@
    (onpulse [this]
      (if (. this -active)
        (if (. this -clicked)
-         (let [ opc (js.parseFloat this.target.style.opacity)]
+         (let [ opc (js/parseFloat this.target.style.opacity)]
            (if (>= opc this.max)
              (do
                (set! this.target.style.opacity 1)
@@ -87,7 +87,7 @@
                (set! this.target.style.opacity
                      (+ (* 2 this.step) opc)))))
 
-         (let [ opc (js.parseFloat this.target.style.opacity)]
+         (let [ opc (js/parseFloat this.target.style.opacity)]
            (if (<= opc 0)
              (do
                (set! this.target.style.opacity 0)

@@ -1,11 +1,12 @@
 (ns app.render)
 
 (defn init [ canvas container ]
-  (def webgl (new js.THREE.WebGLRenderer (js-obj    "canvas" canvas
+  (def webgl (new js/THREE.WebGLRenderer (js-obj    "canvas" canvas
                                                     "antialias" true)))
   
 ;                                                    "alpha" true )))
 
+  (.setClearColor webgl 0xfefbd8)
   (.setPixelRatio webgl js/window.devicePixelRatio )
  
   (.setSize webgl  (.-offsetWidth container)  (.-offsetHeight container))

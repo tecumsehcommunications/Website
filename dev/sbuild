@@ -1,0 +1,2 @@
+clj -M --main cljs.main --repl-opts "{:launch-browser false}" -co "{ :main "server.core" :optimizations :simple :source-map false :output-dir \".stemp\" :output-to \"srv/server.js\"}" --compile "server.core"
+

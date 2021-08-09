@@ -7,6 +7,7 @@
             [app.controllers :as controllers])
    (:import goog.events))
 
+
 (def resizeArray (array))
 (set! js/window.onresize
       (fn [e] (.forEach resizeArray
@@ -17,18 +18,18 @@
 
 (defn ^:export main [ ]
 
-  (def scenes (.getElementById js.document "scenes"))
+  (def scenes (.getElementById js/document "scenes"))
   
   ; different scenes
-  (def canvasContainer (.getElementById js.document "canvasContainer"))
-  (def canvas (.getElementById js.document "canvas"))
+  (def canvasContainer (.getElementById js/document "canvasContainer"))
+  (def canvas (.getElementById js/document "canvas"))
 
-  (def logo (.getElementById js.document "logo"))
-  (def contact (.getElementById js.document "contact"))
-  (def pitch (.getElementById js.document "pitch"))
+  (def logo (.getElementById js/document "logo"))
+  (def contact (.getElementById js/document "contact"))
+  (def pitch (.getElementById js/document "pitch"))
   
   ; controls
-  (def navControls(.getElementById js.document "navControls"))
+  (def navControls(.getElementById js/document "navControls"))
   
   (def ncHome (.getElementById
                (. navControls -contentDocument) "home"))
@@ -57,7 +58,7 @@
   
   ; scene controls
 
-  (def sceneControls (.getElementById js.document "sceneControls"))
+  (def sceneControls (.getElementById js/document "sceneControls"))
 
   (def resetButton (.getElementById
        (. sceneControls -contentDocument) "resetButton"))
@@ -84,8 +85,6 @@
   (def truckBackground (.getElementById
                         (. sceneControls -contentDocument) "truckBackground"))
 
-
-
   ;app
 
   (def navControlsList (list ncHome ncContact ncBaseStation ncPitch ncGithub))
@@ -100,16 +99,15 @@
   (.add clock pulser)
 
   (def spinner (.init (new controllers/Spinner
-                             (.getElementById js.document "spinner")
+                             (.getElementById js/document "spinner")
                       (array
-                       (.querySelector js.document ".ring div:nth-child(1)")
-                       (.querySelector js.document ".ring div:nth-child(2)")
-                       (.querySelector js.document ".ring div:nth-child(3)")))))
+                       (.querySelector js/document ".ring div:nth-child(1)")
+                       (.querySelector js/document ".ring div:nth-child(2)")
+                       (.querySelector js/document ".ring div:nth-child(3)")))))
 
  (def renderControl (js-obj
-      "run"  (fn [] (.render renderer/webgl scenes/scene scenes/camera))
-      "active" false))
-
+                     "run"  (fn [] (.render renderer/webgl scenes/scene scenes/camera))
+                     "active" false))
   
   (set! ncHome.controller
       (.init (new controllers/ControlButton
@@ -176,7 +174,7 @@
                     (fn [] ; onActivate
                       (.activate ncHome.controller)
                       (.deactivate ncGithub.controller)
-                      (.open js.window
+                      (.open js/window
                          "https://github.com/tecumsehcommunications"
                          "_blank"))
                     nil ; onDeactivate
@@ -198,7 +196,7 @@
               (fn [e]
                 (set! canvasContainer.style.opacity 1)
                 (set! canvas.style.display nil)
-                (def controls (new js.THREE.OrbitControls scenes/camera canvas))
+                (def controls (new js/THREE.OrbitControls scenes/camera canvas))
 
                 (set! resetButton.onclick
                       (fn [evt]
@@ -220,19 +218,18 @@
                               cageButton
                               cageBackground
                               (fn []
-                                (set! scenes/scene.objects.truckBox.visible false))
+                                (set! scenes/scene.objects.truckBed.visible false))
                                 
                               (fn []
-                                (set! scenes/scene.objects.truckBox.visible true)))))
-                       
+                                (set! scenes/scene.objects.truckBed.visible true)))))
                 (.activate cageButton.controller)
                 
                 (set! liftButton.controller
                   (.init (new controllers/ToggleButton
                               liftButton
                               liftBackground
-                     (fn [] (set! scenes/scene.objects.rollBar.visible false))
-                     (fn [] (set! scenes/scene.objects.rollBar.visible true)))))
+                     (fn [] (set! scenes/scene.objects.gantry.visible false))
+                     (fn [] (set! scenes/scene.objects.gantry.visible true)))))
 
 
                 (set! truckButton.controller
@@ -247,8 +244,8 @@
                (set! renderControl.active true)))
 
   (let [ param (aget
-              js.window.location.search
-              (- js.window.location.search.length 1)) ]
+              js/window.location.search
+              (- js/window.location.search.length 1)) ]
    (case param
      "1" (.onclick ncBaseStation.controller)
      "2" (.onclick ncPitch.controller)
