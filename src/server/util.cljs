@@ -2,14 +2,78 @@
   (:require [cljs.nodejs :as node])
   (:import goog.dom))
 
-  (def root "/usr/lib/node_modules/")
+  (def root "/usr/local/lib/node_modules/")
 
-  (def fs (node/require "fs"))
-  (def gm (node/require (str root "gm")))
-  (def request (node/require (str root "request")))
-  (def parser (node/require (str root "node-html-parser")))
-  (def mongodb (node/require (str root "mongodb")))
-  (def wss (node/require (str root "ws")))
+;  (def fs (node/require "fs"))
+;  (def gm (node/require (str root "gm")))
+;  (def parser (node/require (str root "node-html-parser")))
+(def mongodb (node/require (str root "mongodb")))
+(def wss (node/require (str root "ws")))
+
+(def uidgen (node/require (str root "uuid")))
+(def xhr (node/require (str root "request")))
+
+(defn couchGet [ msg ]
+  (.get xhr (str "http://admin:Pa$$w0rd@127.0.0.1:5984/" msg)
+        (fn [err res body]
+          (.log js/console body))))
+
+
+(defn couchPut [ msg ]
+  (.put xhr (str "http://admin:Pa$$w0rd@127.0.0.1:5984/" msg)
+        (fn [err res body]
+          (.log js/console body))))
+
+(defn createDoc [ database docObj ]
+  (.put xhr (js-obj
+                "url" (str "http://admin:Pa$$w0rd@127.0.0.1:5984/"
+                           database
+                           "/"
+                           (.replace clojure.string (.v4 uidgen) "-" ""))
+                "body"  (.stringify js/JSON docObj))))
+
+(defn getCards []
+  (.get xhr "http://127.0.0.1:5984/flashcards/_design/dDoc1/_view/v1"
+        (fn [ err res body ] (.log js/console body))))
+(getCards)
+
+ 
+(def c1 (js-obj "seqno" 1 "english" "person" "pinyin" "rén" "chinese" "人"))
+(def c2 (js-obj "seqno" 2 "english" "knife" "pinyin" "dāo" "chinese" "刀"))
+(def c3 (js-obj "seqno" 3 "english" "power" "pinyin" "lì" "chinese" "力"))
+(def c4 (js-obj "seqno" 4 "english" "right hand; again" "pinyin" "yòu" "chinese" "又"))
+(def c5 (js-obj "seqno" 5 "english" "mouth" "pinyin" "kǒu" "chinese" "口"))
+(def c6 (js-obj "seqno" 6 "english" "enclose" "pinyin" "wéi" "chinese" "囗"))
+(def c7 (js-obj "seqno" 7 "english" "earth" "pinyin" "tǔ" "chinese" "土"))
+(def c8 (js-obj "seqno" 8 "english" "sunset" "pinyin" "xī" "chinese" "夕"))
+(def c9 (js-obj "seqno" 9 "english" "big" "pinyin" "dà" "chinese" "大"))
+(def c10 (js-obj "seqno" 10 "english" "woman" "pinyin" "nǚ" "chinese" "女"))
+(def c11 (js-obj "seqno" 11 "english" "son" "pinyin" "zǐ" "chinese" "子"))
+(def c12 (js-obj "seqno" 12 "english" "inch" "pinyin" "cùn" "chinese" "寸"))
+(def c13 (js-obj "seqno" 13 "english" "small" "pinyin" "xiǎo" "chinese" "小"))
+(def c14 (js-obj "seqno" 14 "english" "labor; work" "gōng" "tǔ" "chinese" "工"))
+(def c15 (js-obj "seqno" 15 "english" "tiny; small" "pinyin" "yāo" "chinese" "幺"))
+(def c16 (js-obj "seqno" 16 "english" "bow" "pinyin" "gōng" "chinese" "弓"))
+(def c17 (js-obj "seqno" 17 "english" "heart" "pinyin" "xīn" "chinese" "心"))
+(def c18 (js-obj "seqno" 18 "english" "dagger-axe" "pinyin" "gē" "chinese" "戈"))
+(def c19 (js-obj "seqno" 19 "english" "hand" "pinyin" "shǒu" "chinese" "手"))
+(def c20 (js-obj "seqno" 20 "english" "sun" "pinyin" "rì" "chinese" "日"))
+(def c21 (js-obj "seqno" 21 "english" "moon" "pinyin" "yuè" "chinese" "月"))
+(def c22 (js-obj "seqno" 22 "english" "wood" "pinyin" "mù" "chinese" "木"))
+(def c23 (js-obj "seqno" 23 "english" "water" "pinyin" "shuǐ" "chinese" "水"))
+(def c24 (js-obj "seqno" 24 "english" "fire" "pinyin" "huǒ" "chinese" "火"))
+(def c25 (js-obj "seqno" 25 "english" "field" "pinyin" "tián" "chinese" "田"))
+(def c26 (js-obj "seqno" 26 "english" "eye" "pinyin" "mù" "chinese" "目"))
+(def c27 (js-obj "seqno" 27 "english" "show" "pinyin" "shì" "chinese" "示"))
+(def c28 (js-obj "seqno" 28 "english" "fine silk" "pinyin" "mì" "chinese" "纟"))
+
+(createDoc "flashcards" c28)
+
+
+(couchGet "_all_dbs")
+
+
+  (def livereload (node/require (str root "livereload")))
 
   (defn livereload-on [ directory ]
     (let [ lrServer (.createServer livereload
@@ -18,10 +82,23 @@
           fileWatcher (.watch lrServer directory) ]))
 
 
-
  (def lrHandle (livereload-on "/var/www/html/"))
 
 
+;;;;
+
+(def mongoClient (. mongodb -MongoClient))
+(def mongoURL "mongodb://localhost:27017")
+(def dbClient (new mongoClient mongoURL))
+(.then  (.connect dbClient) (.log js/console "successful db connection"))
+(def db (.db dbClient "flashcards"))(d
+(def collection (.collection db "documents"))
+(.insertOne collection (def mike #js {:_id "4EBA" :pinyin "ren" :english "person" }  )
+(def mike (.find collection #js {:_id "4EBA"})) 
+(.each mike (fn [ err item] (.log js/console item)))
+            
+(.close db)
+(js-obj 
 
   (defn newWss [ port ]
       (new wss.Server (js-obj "port" port)))  

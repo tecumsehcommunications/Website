@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+  <meta content="width=device-width, initial-scale=1" name="viewport" />
+  <meta charset="UTF-8">
+  <link rel="stylesheet" type="text/css" href="css/index.css">
+</head>
+
+<body>
+  <helloworld>
+ <div id="scenes">
+    
+    <div id="logo" style="opacity:0; display:none;">
+      <img class="containedImg" src="img/tecumseh-path.raw.svg"></img>
+    </div>
+
+    <div id="contact" style="opacity:0; display:none;">
+      <img  class="containedImg" src="img/contact-path-raw.svg"></img>
+    </div>
+
+    <div id="pitch" style="opacity:0; display:none;">
+      <img class="containedImg" src="img/intro-path-plain.svg"></img>
+    </div>
+    
+    <div id="canvasContainer" style="opacity:0;">
+      
+      <object id="sceneControls" type="image/svg+xml" data="img/sceneControls.svg"> </object>
+    
+      <canvas id="canvas" style="display:none;"></canvas>
+          
+    </div>
+    
+  </div>  
+         
+ <div id="navControlsContainer">
+       <object id="navControls" type="image/svg+xml" data="img/tecumseh-buttons.svg"> </object>
+      
+       
+  </div>
+   
+
+  
+   
+  </div>
+
+  <div id="spinner" style="display:none;" class="ring"><div></div><div></div><div></div></div>
+
+  <script src="js/three.min.js"></script>
+  <script src="js/GLTFLoader.js"></script>
+  <script src="js/OrbitControls.js"></script> 
+  <script src="js/app.js"></script> 
+  <script>window.onload = function(){app.core.main("");};</script> 
+ 
+  
+</body>
+</html>

@@ -1,5 +1,5 @@
 (ns app.core
-  (:require [app.repl :as repl]
+  (:require ; [app.repl :as repl]
             [app.util.frame :as frame]
             [app.render :as renderer]
             [app.scenes :as scenes]

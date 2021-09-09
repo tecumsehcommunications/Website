@@ -1,0 +1,2 @@
+clj -M --main cljs.main --repl-opts "{:launch-browser false}" -co "{ :main "cards.core" :optimizations :simple :source-map false :output-dir \".ftemp\" :output-to \"pub/js/cards.js\"}" --compile "cards.core"
+

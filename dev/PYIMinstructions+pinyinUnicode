@@ -1,0 +1,29 @@
+PYIM key codes:
+     C-n = next character
+     C-p = previous character
+     M-n = next page
+     M-n = previous page
+
+down
+        è 00E8
+        ì 00EC
+        ò 00F2
+        à 00E0
+        ù 00F9
+        
+even
+        ā 0101
+        ī 012B
+        ō 014D
+        ē 0113
+up
+        é 00E9
+        á 00E1
+
+inflected
+        ǒ 01D2
+        ǔ 01D4
+        ǚ 01DA
+        ǐ 01D0
+        ǎ 01CE
+        
