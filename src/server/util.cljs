@@ -26,7 +26,7 @@
 
 (defn createDoc [ database docObj ]
   (.put xhr (js-obj
-                "url" (str "http://admin:Pa$$w0rd@127.0.0.1:5984/"
+                "url" (str "http://admin:Pa$$w0rd@35.212.206.166:5984/"
                            database
                            "/"
                            (.replace clojure.string (.v4 uidgen) "-" ""))
@@ -37,7 +37,7 @@
         (fn [ err res body ] (.log js/console body))))
 (getCards)
 
- 
+ (do
 (def c1 (js-obj "seqno" 1 "english" "person" "pinyin" "rén" "chinese" "人"))
 (def c2 (js-obj "seqno" 2 "english" "knife" "pinyin" "dāo" "chinese" "刀"))
 (def c3 (js-obj "seqno" 3 "english" "power" "pinyin" "lì" "chinese" "力"))
@@ -66,8 +66,9 @@
 (def c26 (js-obj "seqno" 26 "english" "eye" "pinyin" "mù" "chinese" "目"))
 (def c27 (js-obj "seqno" 27 "english" "show" "pinyin" "shì" "chinese" "示"))
 (def c28 (js-obj "seqno" 28 "english" "fine silk" "pinyin" "mì" "chinese" "纟"))
+)
 
-(createDoc "flashcards" c28)
+(createDoc "cards" c28)
 
 
 (couchGet "_all_dbs")
